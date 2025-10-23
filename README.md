@@ -197,5 +197,3 @@ curl -X DELETE https://your-app-url.onrender.com/posts/1 \
 ## 📜 License
 
 This project is licensed under the MIT License.
-```
-
