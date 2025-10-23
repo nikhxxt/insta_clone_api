@@ -1,23 +1,12 @@
-# schemas.py
-from pydantic import BaseModel
-
-class PostCreate(BaseModel):
-    text: str
-
-class Post(BaseModel):
-    id: int
-    text: str
-    owner_id: int
-
-class User(BaseModel):
-    id: int
-    username: str
+from pydantic import BaseModel, Field
+from typing import Optional
+from uuid import UUID
 
 class Like(BaseModel):
-    post_id: int
+    post_id: UUID
     user_id: int
 
 class Comment(BaseModel):
-    post_id: int
+    post_id: UUID
     user_id: int
-    text: str
+    text: str = Field(..., min_length=1, max_length=300)
