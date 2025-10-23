@@ -1,15 +1,20 @@
-# routers/posts.py
 from fastapi import APIRouter, Depends, HTTPException
 from database import fake_posts_db
 from schemas import PostCreate, Post, Comment, Like, User
 from dependencies import get_current_user
+from uuid import uuid4, UUID
+from datetime import datetime
 
 router = APIRouter()
 
 @router.post("/posts/", response_model=Post)
 def create_post(post: PostCreate, current_user: User = Depends(get_current_user)):
-    post_id = len(fake_posts_db) + 1
-    new_post = {"id": post_id, "text": post.text, "owner_id": current_user.id}
+    new_post = {
+        "id": uuid4(),
+        "text": post.text,
+        "owner_id": current_user.id,
+        "created_at": datetime.utcnow()
+    }
     fake_posts_db.append(new_post)
     return new_post
 
@@ -18,7 +23,7 @@ def get_all_posts():
     return fake_posts_db
 
 @router.delete("/posts/{post_id}")
-def delete_post(post_id: int, current_user: User = Depends(get_current_user)):
+def delete_post(post_id: UUID, current_user: User = Depends(get_current_user)):
     for post in fake_posts_db:
         if post["id"] == post_id:
             if post["owner_id"] != current_user.id:
