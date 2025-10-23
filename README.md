@@ -3,6 +3,14 @@
 
 A modular FastAPI backend simulating Instagram-style post activities. Built for clarity, authentication flow demonstration, and cloud deployment. Uses in-memory storage and header-based user simulation for simplicity and speed.
 
+
+
+
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.1.0-green)](https://fastapi.tiangolo.com/)
+[![Render Deploy](https://img.shields.io/badge/Deploy-Render-blue)](https://render.com/)
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/nikhxxt/insta_clone_api-/blob/main/LICENSE)
+
+
 ---
 
 ## 📚 Table of Contents
@@ -194,6 +202,5 @@ curl -X DELETE https://your-app-url.onrender.com/posts/1 \
 
 ---
 
-## 📜 License
-
+📜 License
 This project is licensed under the MIT License.
