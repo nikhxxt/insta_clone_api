@@ -176,8 +176,10 @@ insta_clone_api/
 ├── database.py
 ├── dependencies.py
 ├── schemas.py
+├── LICENSE
 └── routers/
     └── posts.py
+
 ```
 
 ---
@@ -201,6 +203,6 @@ curl -X DELETE https://your-app-url.onrender.com/posts/1 \
 ```
 
 ---
+## 📜 **License**
 
-📜 License
-This project is licensed under the MIT License.
+**This project is licensed under the [MIT License](https://github.com/nikhxxt/insta_clone_api-/blob/main/LICENSE).**
