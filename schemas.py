@@ -35,3 +35,10 @@ class Comment(BaseModel):
     text: str = Field(..., min_length=1, max_length=300, description="Comment text (1–300 characters)")
 
 
+class CommentResponse(BaseModel):
+    post_id: UUID
+    commented_by: User
+    text: str
+    commented_at: datetime
+
+
