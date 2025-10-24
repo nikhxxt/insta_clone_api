@@ -3,28 +3,24 @@
 
 A modular FastAPI backend simulating Instagram-style post activities. Built for clarity, authentication flow demonstration, and cloud deployment. Uses in-memory storage and header-based user simulation for simplicity and speed.
 
-
-
-
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.1.0-green)](https://fastapi.tiangolo.com/)
 [![Render Deploy](https://img.shields.io/badge/Deploy-Render-blue)](https://render.com/)
-[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/nikhxxt/insta_clone_api-/blob/main/LICENSE)
-
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/nikhxxt/insta_clone_api/blob/main/LICENSE)
 
 ---
 
 ## 📚 Table of Contents
 
-- [Features](#-features)  
-- [Authentication Flow](#-authentication-flow)  
-- [Post Endpoints](#-post-endpoints)  
-- [Live Demo](#-live-demo)  
-- [Why Header-Based Auth](#-why-header-based-auth)  
-- [Tech Stack](#-tech-stack)  
-- [Deployment](#-deployment)  
-- [File Structure](#-file-structure)  
-- [Sample Curl Commands](#-sample-curl-commands)  
-- [License](#-license)  
+- [🚀 Features](#-features)  
+- [📬 Authentication Flow](#-authentication-flow)  
+- [📝 Post Endpoints](#-post-endpoints)  
+- [🌐 Live Demo](#-live-demo)  
+- [🔐 Why Header-Based Auth](#-why-header-based-auth)  
+- [🛠 Tech Stack](#-tech-stack)  
+- [🌐 Deployment](#-deployment)  
+- [📁 File Structure](#-file-structure)  
+- [🧪 Sample Curl Commands](#-sample-curl-commands)  
+- [📜 License](#-license)  
 
 ---
 
@@ -33,7 +29,8 @@ A modular FastAPI backend simulating Instagram-style post activities. Built for 
 ✅ Header-based user authentication (`X-User-ID`)  
 📝 Create, view, and delete posts  
 🔐 Ownership checks for delete operations  
-💬 Simulated like and comment endpoints  
+❤️ Simulated like endpoint  
+💬 Simulated comment endpoint  
 📦 Modular structure with FastAPI routers and dependencies  
 🧪 In-memory DB for quick prototyping  
 
@@ -49,7 +46,7 @@ All protected endpoints require a valid `X-User-ID` header.
 X-User-ID: 1
 ```
 
-If the user ID is not found in `fake_users_db`, the API returns a 404 error.
+If the user ID is not found in `fake_users_db`, the API returns a `404 Not Found` error.
 
 ---
 
@@ -84,6 +81,17 @@ X-User-ID: 1
 ### 📄 GET `/posts/`  
 Returns all posts.
 
+**Response:**
+```json
+[
+  {
+    "id": 1,
+    "text": "Hello from InstaClone!",
+    "owner_id": 1
+  }
+]
+```
+
 ---
 
 ### ❌ DELETE `/posts/{post_id}`  
@@ -92,6 +100,13 @@ Deletes a post if owned by the current user.
 **Headers:**
 ```
 X-User-ID: 1
+```
+
+**Response:**
+```json
+{
+  "message": "Post deleted"
+}
 ```
 
 ---
@@ -107,12 +122,29 @@ Simulates liking a post.
 }
 ```
 
+**Response:**
+```json
+{
+  "post_id": 1,
+  "user_id": 2
+}
+```
+
 ---
 
 ### 💬 POST `/comment`  
 Simulates commenting on a post.
 
 **Body:**
+```json
+{
+  "post_id": 1,
+  "user_id": 2,
+  "text": "Nice post!"
+}
+```
+
+**Response:**
 ```json
 {
   "post_id": 1,
@@ -179,7 +211,6 @@ insta_clone_api/
 ├── LICENSE
 └── routers/
     └── posts.py
-
 ```
 
 ---
@@ -189,7 +220,7 @@ insta_clone_api/
 ### ➕ Create Post
 
 ```bash
-curl -X POST https://your-app-url.onrender.com/posts/ \
+curl -X POST https://insta-clone-api-eyqn.onrender.com/posts/ \
   -H "X-User-ID: 1" \
   -H "Content-Type: application/json" \
   -d '{"text": "Hello from InstaClone!"}'
@@ -198,11 +229,28 @@ curl -X POST https://your-app-url.onrender.com/posts/ \
 ### ❌ Delete Post
 
 ```bash
-curl -X DELETE https://your-app-url.onrender.com/posts/1 \
+curl -X DELETE https://insta-clone-api-eyqn.onrender.com/posts/1 \
   -H "X-User-ID: 1"
 ```
 
----
-## 📜 **License**
+### ❤️ Like Post
 
-**This project is licensed under the [MIT License](https://github.com/nikhxxt/insta_clone_api-/blob/main/LICENSE).**
+```bash
+curl -X POST https://insta-clone-api-eyqn.onrender.com/like \
+  -H "Content-Type: application/json" \
+  -d '{"post_id": 1, "user_id": 2}'
+```
+
+### 💬 Comment on Post
+
+```bash
+curl -X POST https://insta-clone-api-eyqn.onrender.com/comment \
+  -H "Content-Type: application/json" \
+  -d '{"post_id": 1, "user_id": 2, "text": "Nice post!"}'
+```
+
+---
+
+## 📜 License
+
+This project is licensed under the [MIT License](https://github.com/nikhxxt/insta_clone_api/blob/main/LICENSE).
