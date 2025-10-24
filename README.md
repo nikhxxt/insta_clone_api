@@ -6,16 +6,16 @@ A modular FastAPI backend simulating Instagram-style post activities. Built for 
 ---
 
 ## 📚 Table of Contents
-- 🚀 Features
-- 📬 Authentication Flow
-- 📝 Post Endpoints
-- ❤️ Like & 💬 Comment Endpoints
-- 🧪 Sample Users
-- 🌐 Live Demo
-- 🛠 Tech Stack
-- 🧪 Run Locally
-- 📁 File Structure
-- 📜 License
+- [🚀 Features](#-features)
+- [📬 Authentication Flow](#-authentication-flow)
+- [📝 Post Endpoints](#-post-endpoints)
+- [❤️ Like & 💬 Comment Endpoints](#-like--comment-endpoints)
+- [🧪 Sample Users](#-sample-users)
+- [🌐 Live Demo](#-live-demo)
+- [🛠 Tech Stack](#-tech-stack)
+- [🧪 Run Locally](#-run-locally)
+- [📁 File Structure](#-file-structure)
+- [📜 License](#-license)
 
 ---
 
@@ -211,7 +211,4 @@ insta_clone_api/
 
 ## 📜 License
 This project is licensed under the [MIT License](https://github.com/nikhxxt/insta_clone_api/blob/main/LICENSE).
-```
-
----
 
