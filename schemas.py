@@ -4,7 +4,7 @@ from uuid import UUID
 from datetime import datetime
 
 class PostCreate(BaseModel):
-    text: str = Field(..., min_length=1)
+    text: str = Field(..., min_length=1, description="Content of the post")
 
 class Post(BaseModel):
     id: UUID
@@ -23,4 +23,5 @@ class Like(BaseModel):
 class Comment(BaseModel):
     post_id: UUID
     user_id: int
-    text: str = Field(..., min_length=1, max_length=300)
+    text: str = Field(..., min_length=1, max_length=300, description="Comment text (1–300 characters)")
+
