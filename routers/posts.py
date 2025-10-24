@@ -1,6 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from database import posts_db
-from schemas import PostCreate, Post, Comment, Like, User, LikeResponse, CommentResponse
+from schemas import (
+    PostCreate, Post, Comment, Like, User,
+    LikeResponse, CommentResponse
+)
 from dependencies import get_current_user
 from uuid import uuid4, UUID
 from datetime import datetime
@@ -34,9 +37,17 @@ def delete_post(post_id: UUID, current_user: User = Depends(get_current_user)):
 
 @router.post("/like", response_model=LikeResponse)
 def like_post(like: Like, current_user: User = Depends(get_current_user)):
+    post = next((p for p in posts_db if p["id"] == like.post_id), None)
+    if not post:
+        raise HTTPException(status_code=404, detail="Post not found")
     return {"detail": f"User {current_user.id} liked post {like.post_id}"}
 
 @router.post("/comment", response_model=CommentResponse)
 def comment_post(comment: Comment, current_user: User = Depends(get_current_user)):
-    return {"detail": f"User {current_user.id} commented on post {comment.post_id}: {comment.text}"}
+    post = next((p for p in posts_db if p["id"] == comment.post_id), None)
+    if not post:
+        raise HTTPException(status_code=404, detail="Post not found")
+    return {
+        "detail": f"User {current_user.id} commented on post {comment.post_id}: {comment.text}"
+    }
 
